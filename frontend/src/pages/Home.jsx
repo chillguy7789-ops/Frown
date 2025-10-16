@@ -310,13 +310,17 @@ const Home = () => {
             <p className="text-lg text-[#736c64]">Authentic Kashmiri Waazwan prepared with traditional recipes</p>
           </div>
 
-          <Tabs defaultValue="waazwan" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-              <TabsTrigger value="waazwan">Waazwan Specials</TabsTrigger>
-              <TabsTrigger value="mutton">Mutton Dishes</TabsTrigger>
+          <Tabs defaultValue="biryani" className="w-full">
+            <TabsList className="grid w-full max-w-4xl mx-auto grid-cols-3 md:grid-cols-6 mb-8">
+              <TabsTrigger value="biryani">Biryani & Rice</TabsTrigger>
+              <TabsTrigger value="indian">Indian Non-Veg</TabsTrigger>
+              <TabsTrigger value="chinese">Chinese</TabsTrigger>
+              <TabsTrigger value="starters">Starters</TabsTrigger>
+              <TabsTrigger value="veg">Vegetarian</TabsTrigger>
+              <TabsTrigger value="specials">Chef Specials</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="waazwan">
+            <TabsContent value="biryani">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {menuItems[0].items.map((item) => (
                   <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
@@ -344,9 +348,121 @@ const Home = () => {
               </div>
             </TabsContent>
 
-            <TabsContent value="mutton">
+            <TabsContent value="indian">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {menuItems[1].items.map((item) => (
+                  <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                    {item.image && (
+                      <div className="h-48 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+                    <CardHeader>
+                      <CardTitle className="text-xl">{item.name}</CardTitle>
+                      <CardDescription className="text-2xl font-bold text-[#61525a]">₹{item.price}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button onClick={() => handleAddToCart(item)} className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Add to Cart
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="chinese">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {menuItems[2].items.map((item) => (
+                  <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                    {item.image && (
+                      <div className="h-48 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+                    <CardHeader>
+                      <CardTitle className="text-xl">{item.name}</CardTitle>
+                      <CardDescription className="text-2xl font-bold text-[#61525a]">₹{item.price}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button onClick={() => handleAddToCart(item)} className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Add to Cart
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="starters">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {menuItems[3].items.map((item) => (
+                  <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                    {item.image && (
+                      <div className="h-48 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+                    <CardHeader>
+                      <CardTitle className="text-xl">{item.name}</CardTitle>
+                      <CardDescription className="text-2xl font-bold text-[#61525a]">₹{item.price}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button onClick={() => handleAddToCart(item)} className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Add to Cart
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="veg">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {menuItems[4].items.map((item) => (
+                  <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                    {item.image && (
+                      <div className="h-48 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+                    <CardHeader>
+                      <CardTitle className="text-xl">{item.name}</CardTitle>
+                      <CardDescription className="text-2xl font-bold text-[#61525a]">₹{item.price}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button onClick={() => handleAddToCart(item)} className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Add to Cart
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="specials">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {menuItems[5].items.map((item) => (
                   <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <CardTitle className="text-xl">{item.name}</CardTitle>
