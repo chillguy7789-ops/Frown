@@ -1,44 +1,104 @@
-import React from 'react';
-import { Phone, MapPin, ShoppingBag, Utensils, Clock, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { Phone, MapPin, ShoppingBag, Utensils, Clock, Mail, Menu, X, ShoppingCart, Star } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { useCart } from '../context/CartContext';
+import Cart from '../components/Cart';
+import { toast } from 'sonner';
 
 const Home = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { addToCart, setIsCartOpen, getCartCount } = useCart();
+
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    toast.success(`${item.name} added to cart!`);
+  };
+
   const menuItems = [
     {
       category: 'Waazwan Specials',
       items: [
-        { name: 'Waaza Chicken', price: 550, image: 'https://images.unsplash.com/photo-1586981114766-708f09a71e20?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85' },
-        { name: 'Waaza Paneer', price: 350, image: 'https://images.unsplash.com/photo-1741026079032-7cb660e44bad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85' },
-        { name: 'Rogangosh', price: 500, image: 'https://images.unsplash.com/photo-1606843046080-45bf7a23c39f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85' },
-        { name: 'Daniya Korma', price: 500, image: 'https://images.unsplash.com/photo-1545247181-516773cae754?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85' },
-        { name: 'Aab Gosh', price: 300, image: 'https://images.unsplash.com/photo-1534939561126-855b8675edd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85' },
-        { name: 'Mirchi Korma', price: 450, image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85' },
-        { name: 'Rista (4 pcs)', price: 500 },
-        { name: 'Rista (2 pcs)', price: 250 },
-        { name: 'Gushtaab (4 pcs)', price: 500 },
-        { name: 'Gushtaab (2 pcs)', price: 300 }
+        { id: 'w1', name: 'Waaza Chicken', price: 550, image: 'https://images.unsplash.com/photo-1586981114766-708f09a71e20?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'w2', name: 'Waaza Paneer', price: 350, image: 'https://images.unsplash.com/photo-1741026079032-7cb660e44bad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'w3', name: 'Rogangosh', price: 500, image: 'https://images.unsplash.com/photo-1606843046080-45bf7a23c39f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'w4', name: 'Daniya Korma', price: 500, image: 'https://images.unsplash.com/photo-1545247181-516773cae754?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'w5', name: 'Aab Gosh', price: 300, image: 'https://images.unsplash.com/photo-1534939561126-855b8675edd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'w6', name: 'Mirchi Korma', price: 450, image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'w7', name: 'Rista (4 pcs)', price: 500, type: 'food' },
+        { id: 'w8', name: 'Rista (2 pcs)', price: 250, type: 'food' },
+        { id: 'w9', name: 'Gushtaab (4 pcs)', price: 500, type: 'food' },
+        { id: 'w10', name: 'Gushtaab (2 pcs)', price: 300, type: 'food' }
       ]
     },
     {
       category: 'Mutton Dishes',
       items: [
-        { name: 'Mutton Kabaab', price: 250 },
-        { name: 'Adhana Kabaab', price: 270 },
-        { name: 'Kabaab Kanti', price: 300 },
-        { name: 'Mutton Kanti', price: 350 },
-        { name: 'Khadai Mutton (4 Pcs)', price: 450 },
-        { name: 'Mutton Dupiyaza', price: 450 }
+        { id: 'm1', name: 'Mutton Kabaab', price: 250, type: 'food' },
+        { id: 'm2', name: 'Adhana Kabaab', price: 270, type: 'food' },
+        { id: 'm3', name: 'Kabaab Kanti', price: 300, type: 'food' },
+        { id: 'm4', name: 'Mutton Kanti', price: 350, type: 'food' },
+        { id: 'm5', name: 'Khadai Mutton (4 Pcs)', price: 450, type: 'food' },
+        { id: 'm6', name: 'Mutton Dupiyaza', price: 450, type: 'food' }
       ]
     }
   ];
 
-  const storeCategories = [
-    { name: 'Groceries', icon: ShoppingBag },
-    { name: 'Snacks & Beverages', icon: ShoppingBag },
-    { name: 'Personal Care', icon: ShoppingBag },
-    { name: 'Cleaning Supplies', icon: ShoppingBag }
+  const storeProducts = [
+    {
+      category: 'Chips & Snacks',
+      items: [
+        { id: 's1', name: 'Lays Magic Masala', price: 20, category: 'Chips & Snacks' },
+        { id: 's2', name: 'Kurkure Masala Munch', price: 20, category: 'Chips & Snacks' },
+        { id: 's3', name: 'Haldiram Namkeen', price: 50, category: 'Chips & Snacks' },
+        { id: 's4', name: 'Bingo Mad Angles', price: 20, category: 'Chips & Snacks' },
+        { id: 's5', name: 'Uncle Chips', price: 20, category: 'Chips & Snacks' },
+        { id: 's6', name: 'Parle-G Biscuits', price: 25, category: 'Chips & Snacks' }
+      ]
+    },
+    {
+      category: 'Beverages',
+      items: [
+        { id: 'b1', name: 'Pepsi (300ml)', price: 40, category: 'Beverages' },
+        { id: 'b2', name: 'Thums Up (300ml)', price: 40, category: 'Beverages' },
+        { id: 'b3', name: 'Coca Cola (300ml)', price: 40, category: 'Beverages' },
+        { id: 'b4', name: 'Mountain Dew (300ml)', price: 40, category: 'Beverages' },
+        { id: 'b5', name: 'Real Juice (1L)', price: 120, category: 'Beverages' },
+        { id: 'b6', name: 'Packaged Water (1L)', price: 20, category: 'Beverages' }
+      ]
+    },
+    {
+      category: 'Groceries',
+      items: [
+        { id: 'g1', name: 'Basmati Rice (1kg)', price: 130, category: 'Groceries' },
+        { id: 'g2', name: 'Toor Dal (1kg)', price: 150, category: 'Groceries' },
+        { id: 'g3', name: 'Wheat Flour (1kg)', price: 45, category: 'Groceries' },
+        { id: 'g4', name: 'Cooking Oil (1L)', price: 180, category: 'Groceries' },
+        { id: 'g5', name: 'Sugar (1kg)', price: 50, category: 'Groceries' },
+        { id: 'g6', name: 'Tea Powder (250g)', price: 120, category: 'Groceries' }
+      ]
+    },
+    {
+      category: 'Personal Care',
+      items: [
+        { id: 'p1', name: 'Dove Soap (100g)', price: 45, category: 'Personal Care' },
+        { id: 'p2', name: 'Colgate Toothpaste', price: 80, category: 'Personal Care' },
+        { id: 'p3', name: 'Pantene Shampoo (180ml)', price: 150, category: 'Personal Care' },
+        { id: 'p4', name: 'Fair & Lovely Cream', price: 120, category: 'Personal Care' },
+        { id: 'p5', name: 'Dettol Handwash', price: 95, category: 'Personal Care' },
+        { id: 'p6', name: 'Parachute Coconut Oil', price: 110, category: 'Personal Care' }
+      ]
+    }
+  ];
+
+  const galleryImages = [
+    { url: 'https://images.unsplash.com/photo-1586981114766-708f09a71e20?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', alt: 'Traditional Kashmiri Dish' },
+    { url: 'https://images.unsplash.com/photo-1606843046080-45bf7a23c39f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', alt: 'Mutton Curry' },
+    { url: 'https://images.unsplash.com/photo-1545247181-516773cae754?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', alt: 'Authentic Waazwan' },
+    { url: 'https://images.unsplash.com/photo-1534939561126-855b8675edd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', alt: 'Rich Curry' },
+    { url: 'https://images.unsplash.com/photo-1713780131281-61ec701ebb6f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwzfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', alt: 'Traditional Cooking' },
+    { url: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', alt: 'Delicious Curry' }
   ];
 
   const testimonials = [
@@ -49,50 +109,107 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      <Cart />
+      
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Utensils className="h-8 w-8 text-[#61525a]" />
-              <h1 className="text-2xl font-bold text-[#1e1919]">Aroma Café & Fine Dine</h1>
+              <h1 className="text-xl md:text-2xl font-bold text-[#1e1919]">Aroma Café & Fine Dine</h1>
             </div>
+            
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
               <a href="#menu" className="text-[#736c64] hover:text-[#61525a] transition-colors">Menu</a>
               <a href="#store" className="text-[#736c64] hover:text-[#61525a] transition-colors">Store</a>
+              <a href="#gallery" className="text-[#736c64] hover:text-[#61525a] transition-colors">Gallery</a>
               <a href="#about" className="text-[#736c64] hover:text-[#61525a] transition-colors">About</a>
               <a href="#contact" className="text-[#736c64] hover:text-[#61525a] transition-colors">Contact</a>
+              <Button
+                onClick={() => setIsCartOpen(true)}
+                variant="outline"
+                className="relative border-[#61525a] text-[#61525a] hover:bg-[#61525a] hover:text-white"
+              >
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Cart
+                {getCartCount() > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {getCartCount()}
+                  </span>
+                )}
+              </Button>
               <Button className="bg-[#61525a] hover:bg-[#4a3f44] text-white">
                 <Phone className="mr-2 h-4 w-4" />
                 Call Now
               </Button>
             </nav>
+
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-2 md:hidden">
+              <Button
+                onClick={() => setIsCartOpen(true)}
+                variant="outline"
+                size="sm"
+                className="relative"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                {getCartCount() > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                    {getCartCount()}
+                  </span>
+                )}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </Button>
+            </div>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <nav className="md:hidden pt-4 pb-2 space-y-2">
+              <a href="#menu" className="block py-2 text-[#736c64] hover:text-[#61525a] transition-colors" onClick={() => setMobileMenuOpen(false)}>Menu</a>
+              <a href="#store" className="block py-2 text-[#736c64] hover:text-[#61525a] transition-colors" onClick={() => setMobileMenuOpen(false)}>Store</a>
+              <a href="#gallery" className="block py-2 text-[#736c64] hover:text-[#61525a] transition-colors" onClick={() => setMobileMenuOpen(false)}>Gallery</a>
+              <a href="#about" className="block py-2 text-[#736c64] hover:text-[#61525a] transition-colors" onClick={() => setMobileMenuOpen(false)}>About</a>
+              <a href="#contact" className="block py-2 text-[#736c64] hover:text-[#61525a] transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+              <Button className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white mt-2">
+                <Phone className="mr-2 h-4 w-4" />
+                Call Now
+              </Button>
+            </nav>
+          )}
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-[#f7f5f2] py-20 overflow-hidden">
+      <section className="relative bg-[#f7f5f2] py-12 md:py-20 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-5xl md:text-6xl font-bold text-[#1e1919] leading-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1e1919] leading-tight">
                 Authentic Kashmiri Flavours
               </h2>
-              <p className="text-xl text-[#736c64]">
+              <p className="text-lg md:text-xl text-[#736c64]">
                 Traditional Waazwan & Daily Essentials Delivered to Your Doorstep
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                <Button size="lg" className="bg-[#61525a] hover:bg-[#4a3f44] text-white" onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}>
                   <Utensils className="mr-2 h-5 w-5" />
                   Order Food
                 </Button>
-                <Button size="lg" variant="outline" className="border-[#61525a] text-[#61525a] hover:bg-[#61525a] hover:text-white">
+                <Button size="lg" variant="outline" className="border-[#61525a] text-[#61525a] hover:bg-[#61525a] hover:text-white" onClick={() => document.getElementById('store')?.scrollIntoView({ behavior: 'smooth' })}>
                   <ShoppingBag className="mr-2 h-5 w-5" />
                   Shop Essentials
                 </Button>
               </div>
-              <div className="flex gap-6 pt-4">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-4">
                 <div className="flex items-center gap-2">
                   <Phone className="h-5 w-5 text-[#61525a]" />
                   <span className="text-[#1e1919] font-medium">9419429575</span>
@@ -103,7 +220,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1713780131281-61ec701ebb6f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwzfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85"
                 alt="Traditional Kashmiri Cuisine"
@@ -115,10 +232,10 @@ const Home = () => {
       </section>
 
       {/* Menu Section */}
-      <section id="menu" className="py-20 bg-white">
+      <section id="menu" className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#1e1919] mb-4">Our Signature Menu</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1e1919] mb-4">Our Signature Menu</h2>
             <p className="text-lg text-[#736c64]">Authentic Kashmiri Waazwan prepared with traditional recipes</p>
           </div>
 
@@ -129,9 +246,9 @@ const Home = () => {
             </TabsList>
 
             <TabsContent value="waazwan">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {menuItems[0].items.map((item, idx) => (
-                  <Card key={idx} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {menuItems[0].items.map((item) => (
+                  <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                     {item.image && (
                       <div className="h-48 overflow-hidden">
                         <img
@@ -146,8 +263,9 @@ const Home = () => {
                       <CardDescription className="text-2xl font-bold text-[#61525a]">₹{item.price}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
-                        Order Now
+                      <Button onClick={() => handleAddToCart(item)} className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Add to Cart
                       </Button>
                     </CardContent>
                   </Card>
@@ -156,16 +274,17 @@ const Home = () => {
             </TabsContent>
 
             <TabsContent value="mutton">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {menuItems[1].items.map((item, idx) => (
-                  <Card key={idx} className="overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {menuItems[1].items.map((item) => (
+                  <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <CardTitle className="text-xl">{item.name}</CardTitle>
                       <CardDescription className="text-2xl font-bold text-[#61525a]">₹{item.price}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <Button className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
-                        Order Now
+                      <Button onClick={() => handleAddToCart(item)} className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                        <ShoppingCart className="mr-2 h-4 w-4" />
+                        Add to Cart
                       </Button>
                     </CardContent>
                   </Card>
@@ -177,32 +296,71 @@ const Home = () => {
       </section>
 
       {/* Store Section */}
-      <section id="store" className="py-20 bg-[#f7f5f2]">
+      <section id="store" className="py-12 md:py-20 bg-[#f7f5f2]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#1e1919] mb-4">Departmental Store</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1e1919] mb-4">Departmental Store</h2>
             <p className="text-lg text-[#736c64]">Daily essentials and groceries delivered fresh</p>
           </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {storeCategories.map((category, idx) => (
-              <Card key={idx} className="text-center hover:shadow-lg transition-shadow cursor-pointer">
-                <CardHeader>
-                  <div className="mx-auto mb-4 w-16 h-16 bg-[#61525a] rounded-full flex items-center justify-center">
-                    <category.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <CardTitle>{category.name}</CardTitle>
-                </CardHeader>
-              </Card>
+
+          <Tabs defaultValue="snacks" className="w-full">
+            <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-2 md:grid-cols-4 mb-8">
+              <TabsTrigger value="snacks">Chips & Snacks</TabsTrigger>
+              <TabsTrigger value="beverages">Beverages</TabsTrigger>
+              <TabsTrigger value="groceries">Groceries</TabsTrigger>
+              <TabsTrigger value="personal">Personal Care</TabsTrigger>
+            </TabsList>
+
+            {storeProducts.map((productCategory, idx) => (
+              <TabsContent key={idx} value={productCategory.category.toLowerCase().split(' ')[0].replace('&', '')}>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {productCategory.items.map((product) => (
+                    <Card key={product.id} className="hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <CardTitle className="text-lg">{product.name}</CardTitle>
+                        <CardDescription className="text-xl font-bold text-[#61525a]">₹{product.price}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button onClick={() => handleAddToCart(product)} className="w-full bg-[#61525a] hover:bg-[#4a3f44] text-white">
+                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          Add to Cart
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1e1919] mb-4">Our Gallery</h2>
+            <p className="text-lg text-[#736c64]">A glimpse of our authentic Kashmiri delicacies</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {galleryImages.map((image, idx) => (
+              <div key={idx} className="relative h-64 overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow group">
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-white">
+      <section id="about" className="py-12 md:py-20 bg-[#f7f5f2]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-[#1e1919] mb-6">About Us</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1e1919] mb-6">About Us</h2>
             <p className="text-lg text-[#736c64] leading-relaxed mb-6">
               Aroma Café & Fine Dine is your one-stop destination for authentic Kashmiri cuisine and daily essentials in Shalimar, Srinagar. We blend traditional Kashmiri hospitality with modern convenience, offering home delivery of our signature Waazwan dishes and fresh groceries.
             </p>
@@ -214,10 +372,10 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-[#f7f5f2]">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#1e1919] mb-4">What Our Customers Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1e1919] mb-4">What Our Customers Say</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, idx) => (
@@ -225,7 +383,7 @@ const Home = () => {
                 <CardHeader>
                   <div className="flex gap-1 mb-2">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <span key={i} className="text-[#fad24b] text-xl">★</span>
+                      <Star key={i} className="h-5 w-5 fill-[#fad24b] text-[#fad24b]" />
                     ))}
                   </div>
                   <CardTitle className="text-lg">{testimonial.name}</CardTitle>
@@ -239,13 +397,28 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
+      {/* Contact Section with Google Maps */}
+      <section id="contact" className="py-12 md:py-20 bg-[#f7f5f2]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#1e1919] mb-4">Visit or Order</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1e1919] mb-4">Visit or Order</h2>
             <p className="text-lg text-[#736c64]">We deliver across Shalimar and nearby areas</p>
           </div>
+          
+          {/* Google Maps */}
+          <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.2869446!2d74.8875!3d34.1051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDA2JzE4LjQiTiA3NMKwNTMnMTUuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Aroma Café & Fine Dine Location"
+            ></iframe>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Card>
               <CardHeader>
@@ -257,7 +430,11 @@ const Home = () => {
               <CardContent className="space-y-2">
                 <p className="text-[#736c64]">Skuast Road, Shalimar</p>
                 <p className="text-[#736c64]">Srinagar, Jammu and Kashmir 190025</p>
-                <Button variant="outline" className="mt-4 border-[#61525a] text-[#61525a] hover:bg-[#61525a] hover:text-white">
+                <Button
+                  variant="outline"
+                  className="mt-4 border-[#61525a] text-[#61525a] hover:bg-[#61525a] hover:text-white"
+                  onClick={() => window.open('https://maps.google.com/?q=Skuast+Road+Shalimar+Srinagar', '_blank')}
+                >
                   View on Map
                 </Button>
               </CardContent>
@@ -281,7 +458,7 @@ const Home = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4 text-[#61525a]" />
-                  <span className="text-[#736c64] text-sm">javeedaslamjaveednahami@gmail.com</span>
+                  <span className="text-[#736c64] text-sm break-all">javeedaslamjaveednahami@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-[#61525a]" />
@@ -309,6 +486,7 @@ const Home = () => {
               <ul className="space-y-2">
                 <li><a href="#menu" className="text-[#bbb5ae] hover:text-white transition-colors">Menu</a></li>
                 <li><a href="#store" className="text-[#bbb5ae] hover:text-white transition-colors">Store</a></li>
+                <li><a href="#gallery" className="text-[#bbb5ae] hover:text-white transition-colors">Gallery</a></li>
                 <li><a href="#about" className="text-[#bbb5ae] hover:text-white transition-colors">About</a></li>
                 <li><a href="#contact" className="text-[#bbb5ae] hover:text-white transition-colors">Contact</a></li>
               </ul>
