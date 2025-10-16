@@ -307,7 +307,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1e1919] mb-4">Our Signature Menu</h2>
-            <p className="text-lg text-[#736c64]">Authentic Kashmiri Waazwan prepared with traditional recipes</p>
+            <p className="text-lg text-[#736c64]">Authentic dishes from Biryani to Chinese cuisine - Over 80+ items!</p>
           </div>
 
           <Tabs defaultValue="biryani" className="w-full">
