@@ -18,29 +18,100 @@ const Home = () => {
 
   const menuItems = [
     {
-      category: 'Waazwan Specials',
+      category: 'Biryani & Rice',
       items: [
-        { id: 'w1', name: 'Waaza Chicken', price: 550, image: 'https://images.unsplash.com/photo-1586981114766-708f09a71e20?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', type: 'food' },
-        { id: 'w2', name: 'Waaza Paneer', price: 350, image: 'https://images.unsplash.com/photo-1741026079032-7cb660e44bad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', type: 'food' },
-        { id: 'w3', name: 'Rogangosh', price: 500, image: 'https://images.unsplash.com/photo-1606843046080-45bf7a23c39f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
-        { id: 'w4', name: 'Daniya Korma', price: 500, image: 'https://images.unsplash.com/photo-1545247181-516773cae754?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
-        { id: 'w5', name: 'Aab Gosh', price: 300, image: 'https://images.unsplash.com/photo-1534939561126-855b8675edd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
-        { id: 'w6', name: 'Mirchi Korma', price: 450, image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
-        { id: 'w7', name: 'Rista (4 pcs)', price: 500, type: 'food' },
-        { id: 'w8', name: 'Rista (2 pcs)', price: 250, type: 'food' },
-        { id: 'w9', name: 'Gushtaab (4 pcs)', price: 500, type: 'food' },
-        { id: 'w10', name: 'Gushtaab (2 pcs)', price: 300, type: 'food' }
+        { id: 'br1', name: 'Veg Biryani (Half)', price: 90, image: 'https://images.unsplash.com/photo-1586981114766-708f09a71e20?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'br2', name: 'Veg Biryani (Full)', price: 180, image: 'https://images.unsplash.com/photo-1586981114766-708f09a71e20?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'br3', name: 'Chicken Biryani (Half)', price: 120, type: 'food' },
+        { id: 'br4', name: 'Chicken Biryani (Full)', price: 220, type: 'food' },
+        { id: 'br5', name: 'Mutton Biryani', price: 300, image: 'https://images.unsplash.com/photo-1606843046080-45bf7a23c39f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwxfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'br6', name: 'Mutton Kabab Biryani', price: 350, type: 'food' },
+        { id: 'br7', name: 'Veg Fried Rice (Half)', price: 130, type: 'food' },
+        { id: 'br8', name: 'Veg Fried Rice (Full)', price: 250, type: 'food' },
+        { id: 'br9', name: 'Chicken Fried Rice (Half)', price: 180, type: 'food' },
+        { id: 'br10', name: 'Chicken Fried Rice (Full)', price: 320, type: 'food' },
+        { id: 'br11', name: 'Egg Fried Rice', price: 210, type: 'food' },
+        { id: 'br12', name: 'Lamb Fried Rice', price: 300, type: 'food' },
+        { id: 'br13', name: 'Beef Fried Rice', price: 250, type: 'food' },
+        { id: 'br14', name: 'Basmati Rice', price: 100, type: 'food' },
+        { id: 'br15', name: 'Zeera Rice', price: 120, type: 'food' },
+        { id: 'br16', name: 'Butter Rice', price: 130, type: 'food' },
+        { id: 'br17', name: 'Peas Pullow', price: 250, type: 'food' },
+        { id: 'br18', name: 'Chicken Pullow', price: 300, type: 'food' },
+        { id: 'br19', name: 'Mutton Pullow', price: 400, type: 'food' }
       ]
     },
     {
-      category: 'Mutton Dishes',
+      category: 'Indian Non-Veg',
       items: [
-        { id: 'm1', name: 'Mutton Kabaab', price: 250, type: 'food' },
-        { id: 'm2', name: 'Adhana Kabaab', price: 270, type: 'food' },
-        { id: 'm3', name: 'Kabaab Kanti', price: 300, type: 'food' },
-        { id: 'm4', name: 'Mutton Kanti', price: 350, type: 'food' },
-        { id: 'm5', name: 'Khadai Mutton (4 Pcs)', price: 450, type: 'food' },
-        { id: 'm6', name: 'Mutton Dupiyaza', price: 450, type: 'food' }
+        { id: 'inv1', name: 'Butter Chicken (Half)', price: 350, image: 'https://images.unsplash.com/photo-1545247181-516773cae754?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'inv2', name: 'Butter Chicken (Full)', price: 650, image: 'https://images.unsplash.com/photo-1545247181-516773cae754?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'inv3', name: 'Khadaai Chicken (Half)', price: 350, type: 'food' },
+        { id: 'inv4', name: 'Khadaai Chicken (Full)', price: 650, type: 'food' },
+        { id: 'inv5', name: 'Chicken Curry (Half)', price: 350, type: 'food' },
+        { id: 'inv6', name: 'Chicken Curry (Full)', price: 650, type: 'food' },
+        { id: 'inv7', name: 'Chicken Korma (Half)', price: 350, type: 'food' },
+        { id: 'inv8', name: 'Chicken Korma (Full)', price: 650, type: 'food' },
+        { id: 'inv9', name: 'Chicken Tikka Masala', price: 400, type: 'food' },
+        { id: 'inv10', name: 'Chicken Butter Masala', price: 420, type: 'food' },
+        { id: 'inv11', name: 'Rogan Gosh Chicken (Half)', price: 350, type: 'food' },
+        { id: 'inv12', name: 'Rogan Gosh Chicken (Full)', price: 650, type: 'food' },
+        { id: 'inv13', name: 'Chicken Daniya Korma (Half)', price: 400, type: 'food' },
+        { id: 'inv14', name: 'Chicken Daniya Korma (Full)', price: 670, type: 'food' },
+        { id: 'inv15', name: 'Punjabi Chicken', price: 500, type: 'food' },
+        { id: 'inv16', name: 'Mutton Keema', price: 450, type: 'food' },
+        { id: 'inv17', name: 'Meethi Korma', price: 450, type: 'food' },
+        { id: 'inv18', name: 'Khadaii Gosh (4 Pcs)', price: 550, type: 'food' }
+      ]
+    },
+    {
+      category: 'Chinese',
+      items: [
+        { id: 'ch1', name: 'Chilly Chicken (Half)', price: 350, image: 'https://images.unsplash.com/photo-1534939561126-855b8675edd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'ch2', name: 'Chilly Chicken (Full)', price: 650, image: 'https://images.unsplash.com/photo-1534939561126-855b8675edd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'ch3', name: 'Ginger Chicken (Half)', price: 350, type: 'food' },
+        { id: 'ch4', name: 'Ginger Chicken (Full)', price: 650, type: 'food' },
+        { id: 'ch5', name: 'Chicken Manchurian (Half)', price: 350, type: 'food' },
+        { id: 'ch6', name: 'Chicken Manchurian (Full)', price: 650, type: 'food' },
+        { id: 'ch7', name: 'Lemon Chicken (Half)', price: 350, type: 'food' },
+        { id: 'ch8', name: 'Lemon Chicken (Full)', price: 650, type: 'food' },
+        { id: 'ch9', name: 'Chicken American Chopsii', price: 320, type: 'food' },
+        { id: 'ch10', name: 'Veg Chopsii', price: 250, type: 'food' },
+        { id: 'ch11', name: 'Schezwan Chicken', price: 350, type: 'food' },
+        { id: 'ch12', name: 'Chicken Chowmin (Half)', price: 130, type: 'food' },
+        { id: 'ch13', name: 'Chicken Chowmin (Full)', price: 250, type: 'food' },
+        { id: 'ch14', name: 'Veg Chowmin (Half)', price: 100, type: 'food' },
+        { id: 'ch15', name: 'Veg Chowmin (Full)', price: 190, type: 'food' }
+      ]
+    },
+    {
+      category: 'Starters & Appetizers',
+      items: [
+        { id: 'st1', name: 'Honey Chilly Potato', price: 300, image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxtdXR0b24lMjBjdXJyeXxlbnwwfHx8fDE3NjA1OTkyNDd8MA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'st2', name: 'Chilly Paneer', price: 280, type: 'food' },
+        { id: 'st3', name: 'Ajwan Seek Kabaab', price: 250, type: 'food' },
+        { id: 'st4', name: 'Chicken Nuggets', price: 300, type: 'food' },
+        { id: 'st5', name: 'Chicken Pop Corn Bites', price: 300, type: 'food' },
+        { id: 'st6', name: 'Punjabi Masala Chicken Tikka', price: 300, type: 'food' },
+        { id: 'st7', name: 'Chicken Ajwan Fingers', price: 300, type: 'food' },
+        { id: 'st8', name: 'Mustard Chilly Wings', price: 300, type: 'food' },
+        { id: 'st9', name: 'Chicken 65', price: 300, type: 'food' },
+        { id: 'st10', name: 'Spicy Roast Chicken', price: 300, type: 'food' }
+      ]
+    },
+    {
+      category: 'Vegetarian',
+      items: [
+        { id: 'veg1', name: 'Paneer Makhni', price: 250, image: 'https://images.unsplash.com/photo-1741026079032-7cb660e44bad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxLYXNobWlyaSUyMGN1aXNpbmV8ZW58MHx8fHwxNzYwNTk5MjQyfDA&ixlib=rb-4.1.0&q=85', type: 'food' },
+        { id: 'veg2', name: 'Khadaii Paneer', price: 220, type: 'food' },
+        { id: 'veg3', name: 'Paneer Tikka Masala', price: 320, type: 'food' },
+        { id: 'veg4', name: 'Veg Pullow', price: 250, type: 'food' }
+      ]
+    },
+    {
+      category: 'Chef Specials',
+      items: [
+        { id: 'sp1', name: 'Chef Surprise', price: 600, type: 'food' }
       ]
     }
   ];
